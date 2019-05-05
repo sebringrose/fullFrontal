@@ -12,3 +12,7 @@ setStyle = (style) => {
   console.log(style)
   iframeDoc.document.getElementById("styleLink").setAttribute("href", "./styles/" + style + ".css")
 }
+
+logOutput = () => {
+  console.log(iframeDoc)
+}
