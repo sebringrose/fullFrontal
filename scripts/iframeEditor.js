@@ -14,5 +14,5 @@ setStyle = (style) => {
 }
 
 logOutput = () => {
-  console.log(iframeDoc)
+  console.log(iframeDoc.document.documentElement.outerHTML)
 }
