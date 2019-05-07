@@ -5,3 +5,4 @@ li { margin: 5px; }
 iframe { border: none; border-radius: 5px; }
 
 .panel { display: flex; flex-direction: column; align-items: center; margin: auto auto; background-color: #999; border-radius: 10px; width: 20%; max-width: 500px; min-width: 200px; }
+.iframe { resize: both; }
