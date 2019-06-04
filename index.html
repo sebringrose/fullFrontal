@@ -1,47 +1,49 @@
+<!-- this is the root editor html file -->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
   <head>
     <meta charset="utf-8">
-    <title>Full-Frontal Web Design</title>
-    <link rel="stylesheet" href="./styles/style.css">
+    <title>Web Builder</title>
+
+    <link rel="stylesheet" href="/styles/style.css">
   </head>
+
   <body>
-    <div class="panel left-panel">
-      <div class="info">
-        <h1>Full Frontal Mockup</h1>
+    <div class="panel panel-left popable">
+
+      <button type="button" name="button" id="pop-out-button">Pop out</button>
+
+      <div>
+        <h1 id="app-name">App Name</h1>
       </div>
 
-      <div class="elements">
-        <h2>Select element to input</h2>
+      <div id="elements">
+        <strong>Drag-in Elements</strong>
         <ul>
-          <li><button onClick="setElement('h1')">h1</button></li>
-          <li><button onClick="setElement('button')">button</button></li>
-          <li><button onClick="setElement('h2')">h2</button></li>
-          <li><button onClick="setElement('a')">anchor</button></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="iframe">
-      <iframe src="./iframe.html" width="100%" height="100%"></iframe>
-    </div>
-
-    <div class="panel right-panel">
-      <div class="style-editor">
-        <h2>Select element style</h2>
-        <ul>
-          <li><button onClick="setStyle('iframe')">none</button></li>
-          <li><button onClick="setStyle('blue-border')">blue-border</button></li>
-          <li><button onClick="setStyle('shadowed')">shadowed</button></li>
-          <li><button onClick="setStyle('upside-down')">upside-down</button></li>
+          <li draggable="true" ondragstart="elementStartDrag(event)">heading</li>
+          <li draggable="true" ondragstart="elementStartDrag(event)">text</li>
+          <li draggable="true" ondragstart="elementStartDrag(event)">image</li>
+          <li draggable="true" ondragstart="elementStartDrag(event)">button</li>
+          <li draggable="true" ondragstart="elementStartDrag(event)">link</li>
         </ul>
       </div>
 
-      <div class="download">
-        <button onclick="logOutput()">Download your website</button>
-      </div>
     </div>
 
-    <script src="./scripts/iframeEditor.js"></script>
+    <div class="iframe resizable">
+      <iframe src="./iframe/iframe.html"></iframe>
+    </div>
+
+    <div class="panel panel-right">
+
+      <div>
+        <h2 id="editing-title">Global Settings</h2>
+      </div>
+
+    </div>
+
+    <script src="./js/events/draggableElements.js"></script>
   </body>
+
 </html>

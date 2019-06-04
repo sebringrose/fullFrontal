@@ -1,8 +1,12 @@
-html, body { width: 100%; height: 100%; margin: 0; }
-body { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; background-color: #111; }
-ul { padding: none; list-style-type: none; }
+/* this is the root editor css file */
+html, body { min-width: 100%; min-height: 100%; margin: 0; }
+body { font-family: sans-serif; background-color: #0123; display: flex; }
+.panel { display: flex; flex-direction: column; align-items: center; background-color: whitesmoke; margin: 10px; }
+.iframe { margin: 10px; }
+iframe { width: 100%; height: 100%; }
+ul { padding: 0; list-style-type: none; }
 li { margin: 5px; }
-iframe { border: none; border-radius: 5px; }
 
-.panel { display: flex; flex-direction: column; align-items: center; margin: auto auto; background-color: #999; border-radius: 10px; width: 20%; max-width: 500px; min-width: 200px; }
-.iframe { resize: both; }
+#elements ul { display: flex; flex-wrap: wrap; }
+#elements li { display: flex; justify-content: center; align-items: center; font-size: 12px;
+  width: 50px; height: 50px; border: solid;  border-width: 1px; border-radius: 3px; }
