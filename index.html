@@ -1,49 +1,29 @@
-<!-- this is the root editor html file -->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
   <head>
     <meta charset="utf-8">
     <title>Web Builder</title>
 
-    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/index.css">
   </head>
 
   <body>
-    <div class="panel panel-left popable">
-
-      <button type="button" name="button" id="pop-out-button">Pop out</button>
-
-      <div>
-        <h1 id="app-name">App Name</h1>
-      </div>
-
-      <div id="elements">
-        <strong>Drag-in Elements</strong>
-        <ul>
-          <li draggable="true" ondragstart="elementStartDrag(event)">heading</li>
-          <li draggable="true" ondragstart="elementStartDrag(event)">text</li>
-          <li draggable="true" ondragstart="elementStartDrag(event)">image</li>
-          <li draggable="true" ondragstart="elementStartDrag(event)">button</li>
-          <li draggable="true" ondragstart="elementStartDrag(event)">link</li>
-        </ul>
-      </div>
-
+    <div id="lpanel-div" class="panel popable">
+      <iframe src="/windows/lpanel.html"></iframe>
     </div>
 
-    <div class="iframe resizable">
-      <iframe src="./iframe/iframe.html"></iframe>
+    <div id="app-div" class="app-view popable">
+      <iframe src="/windows/iframe.html"></iframe>
     </div>
 
-    <div class="panel panel-right">
-
-      <div>
-        <h2 id="editing-title">Global Settings</h2>
-      </div>
-
+    <div id="rpanel-div" class="panel popable">
+      <iframe src="/windows/rpanel.html"></iframe>
     </div>
 
-    <script src="./js/events/draggableElements.js"></script>
+    <!-- scripts -->
+    <script src="/js/windows.js" type="module"></script>
+    <script src="/js/domEditor.js" type="module"></script>
+    <script src="/js/iframeEditor.js" type="module"></script>
+    <script src="/js/draggableElements.js" type="module"></script>
   </body>
-
 </html>
