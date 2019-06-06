@@ -2,28 +2,68 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Web Builder</title>
+    <title>Full Frontal</title>
 
     <link rel="stylesheet" href="/styles/index.css">
   </head>
 
   <body>
-    <div id="lpanel-div" class="panel popable">
-      <iframe src="/windows/lpanel.html"></iframe>
+    <div id="lpanel-div" class="panel">
+      <h1 id="app-name">App Name</h1>
+
+      <div id="elements">
+        <strong>Drag-in Elements</strong>
+        <ul>
+          <li draggable="true" ondragstart="elementStartDrag(event)">heading</li>
+          <li draggable="true" ondragstart="elementStartDrag(event)">text</li>
+          <li draggable="true" ondragstart="elementStartDrag(event)">image</li>
+          <li draggable="true" ondragstart="elementStartDrag(event)">button</li>
+          <li draggable="true" ondragstart="elementStartDrag(event)">link</li>
+        </ul>
+      </div>
     </div>
 
-    <div id="app-div" class="app-view popable">
-      <iframe src="/windows/iframe.html"></iframe>
+    <div id="app-div">
+      <div id="app-div-buttons">
+        <button id="pop-out-button">Create Responsive Window</button>
+        <button id="edit-button">Toggle Edit Mode</button>
+      </div>
+      <iframe id="app-view" src="/iframe/iframe.html" name="Full Frontal App View"></iframe>
     </div>
 
-    <div id="rpanel-div" class="panel popable">
-      <iframe src="/windows/rpanel.html"></iframe>
+    <div id="rpanel-div" class="panel">
+      <h1>Editor Panel</h1>
+      <div id="element-settings">
+        <div id="element-attributes">
+          <h2>Attributes</h2>
+          <ul id="attributes-list"><ul>
+          <select id="attribute-select"></select>
+        </div>
+
+        <div id="element-styles">
+          <h2>Styles</h2>
+          <h4>Element Styles</h4>
+          <ul id="element-styles-list"></ul>
+          <button id="add-attribute-button"></button>
+          <h4>Class Styles</h4>
+          <ul id="class-styles-list"></ul>
+          <select id="attribute-select"></select>
+        </div>
+
+        <div id="element-events">
+          <h2>Events</h2>
+          <ul id="events-list"></ul>
+          <select id="event-select"></select>
+        </div>
+      </div>
     </div>
 
-    <!-- scripts -->
-    <script src="/js/windows.js" type="module"></script>
-    <script src="/js/domEditor.js" type="module"></script>
-    <script src="/js/iframeEditor.js" type="module"></script>
-    <script src="/js/draggableElements.js" type="module"></script>
+    <!-- state script -->
+    <script src="/js/state.js" type="module"></script>
+
+    <!-- iframe scripts -->
+    <script src="/js/iframe.js" type="module"></script>
+    <script src="/js/leftPanel.js" type="module"></script>
+    <script src="/js/rightPanel.js" type="module"></script>
   </body>
 </html>
