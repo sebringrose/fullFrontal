@@ -3,8 +3,8 @@ import { getState, setState } from "/js/state.js"
 let iframe = document.querySelector("#app-view")
 
 function setUpSelection() {
-  setState("selectedElement", { tagName: "setupElement" }, [ [ "/js/rightPanel.js", "handleSelectedElementChange" ] ])
   iframe.addEventListener('load', (evt) => {
+    setState("selectedElement", iframe.contentWindow.document.body, [ [ "/js/rightPanel.js", "handleSelectedElementChange" ] ])
     Array.from(iframe.contentWindow.document.getElementsByTagName("*")).forEach( el => {
       el.addEventListener("click", selectElement)
     })
