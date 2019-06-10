@@ -8,6 +8,9 @@ function setUpSelection() {
     Array.from(iframe.contentWindow.document.getElementsByTagName("*")).forEach( el => {
       el.addEventListener("click", selectElement)
     })
+
+    // also store reference to iframe CSS from here
+    setState("iFrameCSS", iframe.contentWindow.document.styleSheets[0])
   })
 }
 

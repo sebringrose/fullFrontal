@@ -1,31 +1,19 @@
 import { getState, setState } from "/js/state.js"
 
-let elementSettings = {
-  default: {
-    attributes: [ "id", "class" ],
-    styles: [ "margin", "padding", "color", "backgroundColor", "textDecoration", "border", "boxShadow" ],
-    events: [ "onclick" ]
-  }
-}
-
-let elType = document.querySelector("#element-type")
 let attributesList = document.querySelector("#attributes-list")
-let elStylesList = document.querySelector("#element-styles-list")
-let classStylesList = document.querySelector("#class-styles-list")
-let eventsList = document.querySelector("#events-list")
+let stylesList = document.querySelector("#styles-list")
 
 function handleSelectedElementChange() {
-  showAttributes()
+  showElInfo()
 }
 
 function onValueChange() {
-  let selectedElement = getState("selectedElement")
-  if (elementSettings.default.styles.find(style => { return style === event.target.name})) {
-    selectedElement.style[event.target.name] = event.target.value
-    selectedElement.style.margin = event.target.value
-    return
+  if (event.target.name.substring(0,5) = "style") {
+    // do style sheet stuff here
+    // will need to check if editing id or class styles first
   }
-  selectedElement.setAttribute(event.target.name, event.target.value)
+  let selectedElement = getState("selectedElement")
+  selectedElement[event.target.name] = event.target.value
 }
 
 function removeChildren(e) {
@@ -36,37 +24,79 @@ function removeChildren(e) {
     }
 }
 
-function createListItems(items, target) {
-  let selectedElement = getState("selectedElement")
-  items.forEach( item => {
-    let li = document.createElement("li")
-    li.style.className = "settings-li"
-    let key = document.createElement("strong")
-    let value = document.createElement("input")
-    key.textContent = item + ": "
-    value.value = selectedElement.getAttribute(item)
-    value.name = item
-    value.addEventListener("input", onValueChange)
-    li.appendChild(key)
-    li.appendChild(value)
+function createListItem(item, itemValue) {
+  let li = document.createElement("li")
+  li.style.className = "rpanel-li"
+  let key = document.createElement("strong")
+  let value = document.createElement("input")
+  key.textContent = item + ": "
+  value.value = itemValue
+  value.name = item
+  value.addEventListener("input", onValueChange)
+  li.appendChild(key)
+  li.appendChild(value)
 
-    target.appendChild(li)
-  })
+  return li
 }
 
-function showAttributes() {
+function createSelectOption(type, item) {
+  let option = document.createElement("option")
+  option.value = item
+  option.textContent = item
+  if (type === "attributes") {
+    document.querySelector("#attribute-select").appendChild(option)
+  } else if (type === "style") {
+    document.querySelector("#style-select").appendChild(option)
+  }
+}
+
+function showAttributes(element) {
+  if (!(element.tagName === "BODY" || element.tagName === "body") && !document.querySelector("#text-content-li")) {
+    let item = "textContent"
+    let itemValue = element.textContent
+    let li = createListItem(item, itemValue)
+    li.id = "text-content-li"
+    document.querySelector("#attributes-list").appendChild(li)
+  }
+  for (let item in element) {
+    let itemValue = element.getAttribute(item)
+    if (itemValue) {
+      // put attribute in list so it can be edited
+      let li = createListItem(item, itemValue)
+      document.querySelector("#attributes-list").appendChild(li)
+    } else {
+      // put attribute in dropdown so it can be added
+      createSelectOption("attributes", item)
+    }
+  }
+}
+
+function showStyles() {
+  console.log(getState("iFrameCSS"))
+}
+
+function showElInfo() {
   // refresh for new element selection
   removeChildren(attributesList)
-  removeChildren(elStylesList)
-  removeChildren(classStylesList)
-  removeChildren(eventsList)
+  removeChildren(stylesList)
 
-  elType.textContent = getState("selectedElement").tagName
-  // create default settings for element and append to lists
-  // NOTE: defaultStyles is for element styles only
-  createListItems(elementSettings.default.attributes, attributesList)
-  createListItems(elementSettings.default.styles, elStylesList)
-  createListItems(elementSettings.default.events, eventsList)
+  // display functions
+  showAttributes(getState("selectedElement"))
+  showStyles(getState("selectedElement"))
 }
+
+function createAttribute() {
+  console.log('in here')
+  let li = createListItem(event.target.value, "")
+  if (event.target.id === "attribute-select") {
+    attributesList.appendChild(li)
+  } else if (event.target.id === "style-select") {
+    stylesList.appendChild(li)
+  }
+}
+
+document.querySelector("#style-target-select")["onchange"] = showStyles
+document.querySelector("#attribute-select")["onchange"] = createAttribute
+document.querySelector("#style-select")["onchange"] = createAttribute
 
 export { handleSelectedElementChange }
