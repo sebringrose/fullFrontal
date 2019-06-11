@@ -1,6 +1,11 @@
 import { getState, setState } from "/js/state.js"
 
 let iframe = document.querySelector("#app-view")
+setState("iframe", iframe)
+
+function selectElement() {
+  setState("selectedElement", event.target)
+}
 
 function setUpSelection() {
   iframe.addEventListener('load', (evt) => {
@@ -12,10 +17,6 @@ function setUpSelection() {
     // also store reference to iframe CSS from here
     setState("iFrameCSS", iframe.contentWindow.document.styleSheets[0])
   })
-}
-
-function selectElement() {
-  setState("selectedElement", event.target)
 }
 
 function popOut() {

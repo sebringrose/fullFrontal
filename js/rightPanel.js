@@ -50,6 +50,15 @@ function createSelectOption(type, item) {
   }
 }
 
+function createAttribute() {
+  let li = createListItem(event.target.value, "")
+  if (event.target.id === "attribute-select") {
+    attributesList.appendChild(li)
+  } else if (event.target.id === "style-select") {
+    stylesList.appendChild(li)
+  }
+}
+
 function showAttributes(element) {
   if (!(element.tagName === "BODY" || element.tagName === "body") && !document.querySelector("#text-content-li")) {
     let item = "textContent"
@@ -83,16 +92,6 @@ function showElInfo() {
   // display functions
   showAttributes(getState("selectedElement"))
   showStyles(getState("selectedElement"))
-}
-
-function createAttribute() {
-  console.log('in here')
-  let li = createListItem(event.target.value, "")
-  if (event.target.id === "attribute-select") {
-    attributesList.appendChild(li)
-  } else if (event.target.id === "style-select") {
-    stylesList.appendChild(li)
-  }
 }
 
 document.querySelector("#style-target-select")["onchange"] = showStyles
