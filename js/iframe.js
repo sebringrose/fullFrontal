@@ -4,6 +4,7 @@ let iframe = document.querySelector("#app-view")
 setState("iframe", iframe)
 
 function selectElement() {
+  event.stopPropagation()
   setState("selectedElement", event.target)
 }
 

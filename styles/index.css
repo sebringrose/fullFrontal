@@ -9,3 +9,6 @@ li { margin: 0.25rem; }
 #app-div iframe { width: 26rem; height: 46rem;  }
 
 .pop-out-button { flex-grow: 0; }
+
+/* Right panel styles */
+.el-param-input { border: solid; border-width: 0.05rem; padding: 0.1rem; min-height: 1rem; }
