@@ -32,7 +32,7 @@ function createListItem(item, itemValue) {
   let value = document.createElement("div")
   value.setAttribute("contenteditable", true)
   value.className = "el-param-input"
-  value.innerHTML = itemValue
+  value.textContent = itemValue
   value.name = item
   key.textContent = item + ": "
   value.addEventListener("input", onValueChange)
@@ -98,7 +98,7 @@ function showAttributes(element) {
 
   // move style input to bottom and set value to string
   let styleInputDiv = styleLi.getElementsByTagName("div")[0]
-  styleInputDiv.innerHTML = getState("selectedElement").style.cssText
+  styleInputDiv.textContent = getState("selectedElement").style.cssText
 }
 
 function showElInfo() {
