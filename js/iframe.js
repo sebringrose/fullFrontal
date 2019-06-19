@@ -43,5 +43,3 @@ function toggleEdit() {
 }
 
 setUpSelection()
-document.querySelector("#pop-out-button").addEventListener("click", popOut)
-document.querySelector("#edit-button").addEventListener("click", toggleEdit)
