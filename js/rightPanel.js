@@ -61,7 +61,8 @@ function showAttributes(element) {
   let ignoredAttributes = [
     "translate", "tabIndex", "spellcheck", "contentEditable", "offsetWidth", "offsetHeight", "innerText", "outerText", "namespaceURI",
      "localName", "outerHTML", "scrollWidth", "scrollHeight", "clientWidth", "clientHeight", "childElementCount", "nodeType", "nodeName",
-      "baseURI", "isConnected", "textContent", "offsetTop", "className"
+      "baseURI", "isConnected", "textContent", "offsetTop", "offsetLeft", "className", "origin", "protocol", "host", "hostname", "pathname",
+      "clientTop", "clientLeft"
   ]
   for (let item in element) {
     let itemValue = element[item]

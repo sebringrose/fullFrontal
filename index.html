@@ -9,17 +9,11 @@
 
   <body>
     <div id="lpanel-div" class="panel">
-      <h1 id="app-name">Drag-in Elements</h1>
+      <h1 id="app-name">Element Builder</h1>
 
-      <div id="elements">
+      <div>
         <strong>Drag-in Elements</strong>
-        <ul>
-          <li draggable="true" ondragstart="elementStartDrag(event)">heading</li>
-          <li draggable="true" ondragstart="elementStartDrag(event)">text</li>
-          <li draggable="true" ondragstart="elementStartDrag(event)">image</li>
-          <li draggable="true" ondragstart="elementStartDrag(event)">button</li>
-          <li draggable="true" ondragstart="elementStartDrag(event)">link</li>
-        </ul>
+        <ul id="elements-list"></ul>
       </div>
     </div>
 
@@ -36,12 +30,15 @@
       </div>
     </div>
 
-    <!-- state script -->
+    <!-- module scripts -->
+      <!-- state script -->
     <script src="/js/state.js" type="module"></script>
-
-    <!-- iframe scripts -->
     <script src="/js/iframe.js" type="module"></script>
     <script src="/js/leftPanel.js" type="module"></script>
     <script src="/js/rightPanel.js" type="module"></script>
+
+    <!-- DOM scripts -->
+    <script src="/js/dragDropFunctions.js"></script>
+
   </body>
 </html>

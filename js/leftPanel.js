@@ -2,42 +2,66 @@ import { getState, setState } from "/js/state.js"
 
 let iframeDoc = getState("iframe").contentWindow.document
 
-function elementBuilder(elementObj) {
-  console.log(elementObj)
-  let element = iframeDoc.createElement(elementObj.elementType)
+function setUpDraggableEls() {
+  let dragEls = {
+    div: {
+      innerHTML: "Do not delete this text without inserting elements or setting this div's width and/or height in style."
+    },
+    span: {
+      innerHTML: "Do not delete this text without inserting elements or setting this span's width and/or height in style."
+    },
+    ol: {
+      innerHTML: "<li>Ordered list example item.</li>"
+    },
+    ul: {
+      innerHTML: "<li>Unordered list example item</li>"
+    },
+    li: {
+      innerHTML: "List item"
+    },
+    h1: {
+      innerHTML: "Heading 1"
+    },
+    h2: {
+      innerHTML: "Heading 2"
+    },
+    h3: {
+      innerHTML: "Heading 3"
+    },
+    h4: {
+      innerHTML: "Heading 4"
+    },
+    p: {
+      innerHTML: "Paragragh. Lorem ipsum blah blah blah..."
+    },
+    a: {
+      innerHTML: "I am a link",
+      href: "https://i.hope.this.site.does.not.exist.net",
+      target: "_blank"
+    },
+    img: {
+      src: "https://image.flaticon.com/icons/png/512/23/23765.png",
+      alt: "image alt text"
+    },
+    hr: {}
+  }
+  let elList = document.querySelector("#elements-list")
 
-  elementObj.attributes.forEach(attribute => {
-    element[attribute[0]] = attribute[1]
-  })
-
-  console.log(element)
-  return element
-}
-
-// drag and drop functions for elements list and iframe
-function dragStartHandler(ev) {
- // Add the target element's id to the data transfer object
- // this is to change so that it uses a data object containing attributes instead of just id
- ev.dataTransfer.setData("text/plain", ev.target.id)
- ev.dataTransfer.dropEffect = "move"
-
- console.log(ev.target)
-}
-
-function dragOverHandler(ev) {
- // Set the dropEffect to move
- ev.dataTransfer.dropEffect = "move"
-}
-
-async function dragDropHandler(ev) {
- // Get the id of the target and add the moved element to the target's DOM
- // change to use object
- let data = ev.dataTransfer.getData("text/plain")
- let element = elementBuilder(data)
- let target = ev.target
- target.appendChild(element)
+  for (let el in dragEls ) {
+    let dragEl = document.createElement("li")
+    dragEl.className = "draggable-element"
+    dragEl.draggable = "true"
+    dragEl.setAttribute("ondragstart", "dragStartHandler(event)")
+    dragEl.textContent = el
+    for (let attr in dragEls[el]) {
+      dragEl.setAttribute(attr, dragEls[el][attr])
+    }
+    elList.appendChild(dragEl)
+  }
 }
 
 function logOutput() {
   console.log(document.documentElement.outerHTML)
 }
+
+setUpDraggableEls()

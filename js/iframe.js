@@ -13,6 +13,9 @@ function setUpSelection() {
     setState("selectedElement", iframe.contentWindow.document.body, [ [ "/js/rightPanel.js", "handleSelectedElementChange" ] ])
     Array.from(iframe.contentWindow.document.getElementsByTagName("*")).forEach( el => {
       el.addEventListener("click", selectElement)
+      console.log(dropHandler)
+      el.addEventListener("ondrop", dropHandler)
+      el.addEventListener("ondragover", dragOverHandler)
     })
 
     // also store reference to iframe CSS from here
