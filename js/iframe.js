@@ -8,14 +8,18 @@ function selectElement() {
   setState("selectedElement", event.target)
 }
 
-function setUpSelection() {
-  iframe.addEventListener('load', (evt) => {
+async function setUpElements() {
+  iframe.addEventListener('load', (ev) => {
     setState("selectedElement", iframe.contentWindow.document.body, [ [ "/js/rightPanel.js", "handleSelectedElementChange" ] ])
     Array.from(iframe.contentWindow.document.getElementsByTagName("*")).forEach( el => {
-      el.addEventListener("click", selectElement)
-      console.log(dropHandler)
-      el.addEventListener("ondrop", dropHandler)
-      el.addEventListener("ondragover", dragOverHandler)
+      el.addEventListener("click", () => {
+        event.preventDefault()
+        selectElement
+      })
+      el.setAttribute("draggable", true)
+      el.setAttribute("ondragstart", "dragStartHandler()")
+      el.setAttribute("ondragover", "dragOverHandler()")
+      el.setAttribute("ondrop", "dropHandler()")
     })
 
     // also store reference to iframe CSS from here
@@ -23,26 +27,26 @@ function setUpSelection() {
   })
 }
 
-function popOut() {
-  let appView = document.querySelector("#app-view")
-  let popOut = window.open(appView.src, "Full Frontal", "width=400,height=600")
-  popOut.addEventListener('load', (evt) => {
-    Array.from(popOut.document.getElementsByTagName("*")).forEach( el => {
-      el.addEventListener("click", selectElement)
-    })
-  })
-}
+// function popOut() {
+//   let appView = document.querySelector("#app-view")
+//   let popOut = window.open(appView.src, "Full Frontal", "width=400,height=600")
+//   popOut.addEventListener('load', (evt) => {
+//     Array.from(popOut.document.getElementsByTagName("*")).forEach( el => {
+//       el.addEventListener("click", selectElement)
+//     })
+//   })
+// }
+//
+// function toggleEdit() {
+//   if (event.target.style.backgroundColor !== "green") {
+//     // edit mode on
+//     event.target.style.backgroundColor = "green"
+//
+//     // make all elements of app-view selectable and not interactable
+//     return
+//   }
+//   // edit mode off
+//   // elements unselectable and interactable
+// }
 
-function toggleEdit() {
-  if (event.target.style.backgroundColor !== "green") {
-    // edit mode on
-    event.target.style.backgroundColor = "green"
-
-    // make all elements of app-view selectable and not interactable
-    return
-  }
-  // edit mode off
-  // elements unselectable and interactable
-}
-
-setUpSelection()
+setUpElements()
