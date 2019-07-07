@@ -1,7 +1,5 @@
 import { getState, setState } from "/js/state.js"
 
-let iframeDoc = getState("iframe").contentWindow.document
-
 function setUpDraggableEls() {
   let dragEls = {
     div: {
@@ -50,8 +48,6 @@ function setUpDraggableEls() {
   for (let el in dragEls ) {
     let dragEl = document.createElement("li")
     dragEl.className = "draggable-element"
-    dragEl.draggable = "true"
-    dragEl.setAttribute("ondragstart", "dragStartHandler(event)")
     dragEl.textContent = el
     for (let attr in dragEls[el]) {
       dragEl.setAttribute(attr, dragEls[el][attr])

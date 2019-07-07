@@ -8,18 +8,14 @@ function selectElement() {
   setState("selectedElement", event.target)
 }
 
-async function setUpElements() {
+function setUpElementSelection() {
   iframe.addEventListener('load', (ev) => {
     setState("selectedElement", iframe.contentWindow.document.body, [ [ "/js/rightPanel.js", "handleSelectedElementChange" ] ])
-    Array.from(iframe.contentWindow.document.getElementsByTagName("*")).forEach( el => {
+    Array.from(iframe.contentWindow.document.body.getElementsByTagName("*")).forEach( el => {
       el.addEventListener("click", () => {
-        event.preventDefault()
         selectElement
+        event.preventDefault()
       })
-      el.setAttribute("draggable", true)
-      el.setAttribute("ondragstart", "dragStartHandler()")
-      el.setAttribute("ondragover", "dragOverHandler()")
-      el.setAttribute("ondrop", "dropHandler()")
     })
 
     // also store reference to iframe CSS from here
@@ -49,4 +45,4 @@ async function setUpElements() {
 //   // elements unselectable and interactable
 // }
 
-setUpElements()
+setUpElementSelection()
