@@ -1,4 +1,7 @@
 import { getState, setState } from "/js/state.js"
+import { dragStartHandler, dragEndHandler } from "/js/dragDropFunctions.js"
+
+let outputHtmlButton = document.querySelector("#output-html-button")
 
 function setUpDraggableEls() {
   let dragEls = {
@@ -49,6 +52,9 @@ function setUpDraggableEls() {
     let dragEl = document.createElement("li")
     dragEl.className = "draggable-element"
     dragEl.textContent = el
+    dragEl.setAttribute("draggable", true)
+    dragEl.addEventListener("dragstart", dragStartHandler)
+    dragEl.addEventListener("dragend", dragEndHandler)
     for (let attr in dragEls[el]) {
       dragEl.setAttribute(attr, dragEls[el][attr])
     }
@@ -56,8 +62,10 @@ function setUpDraggableEls() {
   }
 }
 
-function logOutput() {
-  console.log(document.documentElement.outerHTML)
+function outputHtml() {
+  console.log(getState("iframe").contentWindow.document.body.outerHTML)
+  alert(getState("iframe").contentWindow.document.body.outerHTML)
 }
 
 setUpDraggableEls()
+outputHtmlButton.addEventListener("click", outputHtml)

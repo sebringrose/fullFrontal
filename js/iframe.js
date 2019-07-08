@@ -1,4 +1,5 @@
 import { getState, setState } from "/js/state.js"
+import { dragStartHandler, dragOverHandler, dropHandler, dragEndHandler } from "/js/dragDropFunctions.js"
 
 let iframe = document.querySelector("#app-view")
 setState("iframe", iframe)
@@ -12,10 +13,12 @@ function setUpElementSelection() {
   iframe.addEventListener('load', (ev) => {
     setState("selectedElement", iframe.contentWindow.document.body, [ [ "/js/rightPanel.js", "handleSelectedElementChange" ] ])
     Array.from(iframe.contentWindow.document.body.getElementsByTagName("*")).forEach( el => {
-      el.addEventListener("click", () => {
-        selectElement
-        event.preventDefault()
-      })
+      el.addEventListener("click", selectElement)
+      el.setAttribute("draggable", true)
+      el.addEventListener("dragstart", dragStartHandler)
+      el.addEventListener("dragover", dragOverHandler)
+      el.addEventListener("drop", dropHandler)
+      el.addEventListener("dragend", dragEndHandler)
     })
 
     // also store reference to iframe CSS from here
